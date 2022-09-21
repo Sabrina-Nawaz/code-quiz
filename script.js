@@ -1,0 +1,1 @@
+var btnStart = document.getElementById('btn-start');
