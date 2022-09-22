@@ -4,25 +4,31 @@ var btnStart = document.getElementById("start");
 var quizEl = document.getElementById("quiz");
 var resultsEl = document.getElementById("results");
 var timerStart;
-var time = 10
+var time = 95
 var questionIndex = 0;
 
+console.log(getElementbyId('timer')
 // Create Questions 
 var questions = [
     {
         question: "Commonly used data types do NOT include:",
-        choices: ['a', 'b', 'c', 'd'],
-        answer: 'a'
+        choices: ['strings', 'alerts', 'booleans', 'numbers'],
+        answer: 'Alerts'
     },
     {
         question: "The condition in an if/else statement is enclosed with:",
-        choices: ['a', 'b', 'c', 'd'],
-        answer: 'a'
+        choices: ['quotes', 'parentheses', 'square brackets', 'curly brackets'],
+        answer: 'curly brackets'
     },
     {
         question: "Arrays in JavaScript can be used to store:",
-        choices: ['a', 'b', 'c', 'd'],
-        answer: 'a'
+        choices: ['numbers', 'strings', 'objects', 'all of the above'],
+        answer: 'all of the above'
+    },
+    {
+        question: "String values must be enclosed in what when being assigned to variables:",
+        choices: ['quotes', 'commas', 'arrays', 'all of the above'],
+        answer: 'quotes'
     },
 ]
 
@@ -36,7 +42,7 @@ console.log(questions[1].question)
 
 
 function start() {
-    // when the quiz start the timer starts...
+    // when the quiz starts,the timer starts...
     timerEl.textContent = time
     // create a timer
     timerStart = setInterval(function () {
@@ -68,7 +74,7 @@ function displayQuestion() {
     // targeted the question property from the current question object and added it to the h2El as its text content
     h2El.textContent = currentQuestionObject.question;
 
-    // iterates throught the choices in the current question object
+    // iterates through the choices in the current question object
     for (var i = 0; i < currentQuestionObject.choices.length; i++) {
     // create a button
         var btnEl = document.createElement('button')
@@ -82,6 +88,20 @@ function displayQuestion() {
     // appends the question and the choices to the quizEl
     quizEl.append(h2El, divEl)
 }
+
+function click() {
+    // need to check if the user selected the wrong answer. If the answer is wrong, then we need to deduct from time.
+    
+    
+    // if there are more questions need to ask the display question function again. else the game is over. if the time has ran out the game is also over. 
+    
+    
+    // when a button is clicked the question index is increased by one
+        questionIndex++
+        console.log(questionIndex)
+    }
+
+
 // user clicks start button
 btnStart.addEventListener('click', start)
 
