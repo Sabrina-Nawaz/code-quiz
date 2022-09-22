@@ -36,7 +36,7 @@ console.log(questions[1].question)
 
 
 function start() {
-// when the quiz start the timer starts...
+    // when the quiz start the timer starts...
     timerEl.textContent = time
     // create a timer
     timerStart = setInterval(function () {
@@ -53,25 +53,30 @@ function start() {
     startContainer.classList.add('hidden')
     // need to show the question container
     quizEl.classList.remove('hidden')
-//    call function that displays your questions
-displayQuestion()
+    //    call function that displays your questions
+    displayQuestion()
 }
 
 // create the function that will diplay your question
-function displayQuestion(){
+function displayQuestion() {
     // dynamically target a single object in the questions array
-    var currentQuestionObject= questions[questionIndex]
+    var currentQuestionObject = questions[questionIndex]
     // created our h2 and div elements
     var h2El = document.createElement('h2');
-    var divEl =document.createElement('div');
+    var divEl = document.createElement('div');
 
     // targeted the question property from the current question object and added it to the h2El as its text content
-    h2El.textContent =currentQuestionObject.question;
+    h2El.textContent = currentQuestionObject.question;
 
     // iterates throught the choices in the current question object
     for (var i = 0; i < currentQuestionObject.choices.length; i++) {
+        // create a button
+        var btnEl = document.createElement('button')
+        // targeted the choices array and added the content of it to eaach button
+        btnEl.textContent = currentQuestionObject.choices[i];
+        btnEl.addEventListener('click', click)
+        // append newly created buttons the div element
+        divEl.append(btnEl)
 
-
-
-//Create Options --> are these appended to the results portion or is this just meant for the initials? Are the options in a giant object with the questions? 
+    }
 
