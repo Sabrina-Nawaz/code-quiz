@@ -57,7 +57,6 @@ function start() {
 displayQuestion()
 }
 
-
 // create the function that will diplay your question
 function displayQuestion(){
     // dynamically target a single object in the questions array
@@ -66,8 +65,11 @@ function displayQuestion(){
     var h2El = document.createElement('h2');
     var divEl =document.createElement('div');
 
-    // targeted the question property from the cxurrent question object and added it to the h2El as its text content
+    // targeted the question property from the current question object and added it to the h2El as its text content
     h2El.textContent =currentQuestionObject.question;
+
+    // iterates throught the choices in the current question object
+    for (var i = 0; i < currentQuestionObject.choices.length; i++) {
 
 
 
