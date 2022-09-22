@@ -58,40 +58,6 @@ displayQuestion()
 }
 
 
-// create the function that will diplay your question
-function displayQuestion(){
-    // dynamically target a single object in the questions array
-    var currentQuestionObject= questions[questionIndex]
-    // created our h2 and div elements
-    var h2El = document.createElement('h2');
-    var divEl =document.createElement('div');
-
-    // targeted the question property from the cxurrent question oject and added it to the h2El as its text content
-    h2El.textContent =currentQuestionObject.question;
-
-    // iterates throught the choices in the current question object
-    for (var i = 0; i < currentQuestionObject.choices.length; i++) {
-
-        // create a button
-        var btnEl = document.createElement('button')
-        // targeted the choices array and added the content of it to eaach button
-        btnEl.textContent = currentQuestionObject.choices[i];
-        btnEl.addEventListener('click', click)
-        // append newly created buttons the div element
-        divEl.append(btnEl)
-
-    }
-
-    // appends the question and the choices to the quizEl
-    quizEl.append(h2El, divEl)
-}
-
-function click() {
-
-    qIndex++
-    console.log(qIndex)
-}
-
 // user clicks start button
 btnStart.addEventListener('click', start)
 
