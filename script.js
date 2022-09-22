@@ -66,6 +66,9 @@ function displayQuestion(){
     var h2El = document.createElement('h2');
     var divEl =document.createElement('div');
 
+    // targeted the question property from the cxurrent question object and added it to the h2El as its text content
+    h2El.textContent =currentQuestionObject.question;
+
 
 
 //Create Options --> are these appended to the results portion or is this just meant for the initials? Are the options in a giant object with the questions? 
