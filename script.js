@@ -70,13 +70,18 @@ function displayQuestion() {
 
     // iterates throught the choices in the current question object
     for (var i = 0; i < currentQuestionObject.choices.length; i++) {
-        // create a button
+    // create a button
         var btnEl = document.createElement('button')
-        // targeted the choices array and added the content of it to eaach button
+        // targeted the choices array and added the content of it to each button
         btnEl.textContent = currentQuestionObject.choices[i];
         btnEl.addEventListener('click', click)
         // append newly created buttons the div element
         divEl.append(btnEl)
 
     }
+    // appends the question and the choices to the quizEl
+    quizEl.append(h2El, divEl)
+}
+
+
 
