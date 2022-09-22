@@ -82,6 +82,10 @@ function displayQuestion() {
     // appends the question and the choices to the quizEl
     quizEl.append(h2El, divEl)
 }
+// user clicks start button
+btnStart.addEventListener('click', start)
 
+
+//Create Options --> are these appended to the results portion or is this just meant for the initials? Are the options in a giant object with the questions? 
 
 
