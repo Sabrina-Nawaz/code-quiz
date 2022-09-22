@@ -58,8 +58,15 @@ displayQuestion()
 }
 
 
-// user clicks start button
-btnStart.addEventListener('click', start)
+// create the function that will diplay your question
+function displayQuestion(){
+    // dynamically target a single object in the questions array
+    var currentQuestionObject= questions[questionIndex]
+    // created our h2 and div elements
+    var h2El = document.createElement('h2');
+    var divEl =document.createElement('div');
+
+
 
 //Create Options --> are these appended to the results portion or is this just meant for the initials? Are the options in a giant object with the questions? 
 
