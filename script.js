@@ -6,12 +6,9 @@ var resultsEl = document.getElementById("results");
 var timerStart;
 var time = 95
 var questionIndex = 0;
-var rightAnswers = ['alerts', 'curly brackets', 'all of the above', 'quotes'];
-var incorrectAnswers = ['strings', 'booleans', 'numbers', 'parentheses', 'square brackets', 'objects'];
-var rightCount = 0;
-var wrongCount = 0;
 
-console.log(answers)
+
+
 // Create Questions 
 var questions = [
     {
@@ -45,10 +42,10 @@ function start() {
         time--
         // this displays time on the page
         timerEl.textContent = time
-        if (time === 0) {
-            // this stops timer if it reaches 0
-            clearInterval(timerStart)
-        }
+        // if (time === 0) {
+        //     // this stops timer if it reaches 0
+        //     clearInterval(timerStart)
+        // }
 
     }, 1000)
     // hide an element
@@ -61,6 +58,7 @@ function start() {
 
 // create the function that will diplay your question
 function displayQuestion() {
+    quizEl.innerHTML = '';
     // dynamically target a single object in the questions array
     var currentQuestionObject = questions[questionIndex]
     // created our h2 and div elements
@@ -72,10 +70,11 @@ function displayQuestion() {
 
     // iterates through the choices in the current question object
     for (var i = 0; i < currentQuestionObject.choices.length; i++) {
-    // create a button
+        // create a button
         var btnEl = document.createElement('button')
         // targeted the choices array and added the content of it to each button
         btnEl.textContent = currentQuestionObject.choices[i];
+        btnEl.setAttribute('value', currentQuestionObject.choices[i])
         btnEl.addEventListener('click', click)
         // append newly created buttons the div element
         divEl.append(btnEl)
@@ -86,26 +85,41 @@ function displayQuestion() {
 }
 
 function click() {
-    // need to check if the user selected the wrong answer. If the answer is wrong, then we need to deduct from time.
-    var correctAnswers = questions[rightAnswers]
-    var wrongAnswers = questions[incorrectAnswers]
 
-    function checkTruth(true) {
-        if (correctAnswers === 'true') {
-            rightCount += 1;
-        } else {
-        if wrongAnswers !== 'true'
-        wrongCount += 1; 
+    // need to check if the user selected the wrong answer. If the answer is wrong, then we need to deduct from time.
+    if (this.value !== questions[questionIndex].answer) {
+        time -= 10
+
+        // time = time - 10
+        // to ensure that time never goes below 0 if the user answers the questions incorrectly. This condition keeps it at 0
+        if (time < 0) {
+            time = 0;
         }
+        // this displays time on the page
+        timerEl.textContent = time
     }
-    
-    // if there are more questions need to ask the display question function again. else the game is over. if the time has ran out the game is also over. 
-    
-    
     // when a button is clicked the question index is increased by one
-        questionIndex++
-        console.log(questionIndex)
+    questionIndex++
+    // console.log(questionIndex)
+
+    // if there are more questions need to ask the display question function again. else the game is over. if the time has ran out the game is also over. 
+    if (time === 0 || questionIndex === 4) {
+        gameOver()
+    } else {
+        displayQuestion()
     }
+
+}
+
+function gameOver() {
+    // stop timer
+    clearInterval(timerStart)
+
+    // hide an element
+    quizEl.classList.add('hidden')
+    // need to show the question container
+    resultsEl.classList.remove('hidden')
+}
 
 
 // user clicks start button
