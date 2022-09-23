@@ -6,8 +6,10 @@ var resultsEl = document.getElementById("results");
 var timerStart;
 var time = 95
 var questionIndex = 0;
-var answers = ['alerts', 'curly brackets', 'all of the above', 'quotes'];
-var incorrect = ['strings', 'booleans', 'numbers', 'parentheses', 'square brackets', 'objects'];
+var rightAnswers = ['alerts', 'curly brackets', 'all of the above', 'quotes'];
+var incorrectAnswers = ['strings', 'booleans', 'numbers', 'parentheses', 'square brackets', 'objects'];
+var rightCount = 0;
+var wrongCount = 0;
 
 console.log(answers)
 // Create Questions 
@@ -85,12 +87,17 @@ function displayQuestion() {
 
 function click() {
     // need to check if the user selected the wrong answer. If the answer is wrong, then we need to deduct from time.
-    var correctAnswers = questions[answers]
+    var correctAnswers = questions[rightAnswers]
+    var wrongAnswers = questions[incorrectAnswers]
 
-    var wrongAnswers = questions[incorrect]
-
-    if (correctAnswers === )
-    
+    function checkTruth(true) {
+        if (correctAnswers === 'true') {
+            rightCount += 1;
+        } else {
+        if wrongAnswers !== 'true'
+        wrongCount += 1; 
+        }
+    }
     
     // if there are more questions need to ask the display question function again. else the game is over. if the time has ran out the game is also over. 
     
@@ -108,4 +115,3 @@ btnStart.addEventListener('click', start)
 //Create Options --> are these appended to the results portion or is this just meant for the initials? Are the options in a giant object with the questions? 
 
 
-console.log(answers, incorrect)
