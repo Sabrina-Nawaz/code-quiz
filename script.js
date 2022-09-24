@@ -7,8 +7,6 @@ var timerStart;
 var time = 95
 var questionIndex = 0;
 
-
-
 // Create Questions 
 var questions = [
     {
@@ -42,10 +40,10 @@ function start() {
         time--
         // this displays time on the page
         timerEl.textContent = time
-        // if (time === 0) {
-        //     // this stops timer if it reaches 0
-        //     clearInterval(timerStart)
-        // }
+        if (time <= 0) {
+            //this stops timer if it reaches 0
+            return clearInterval(timerStart)
+        }
 
     }, 1000)
     // hide an element
@@ -88,7 +86,7 @@ function click() {
 
     // need to check if the user selected the wrong answer. If the answer is wrong, then we need to deduct from time.
     if (this.value !== questions[questionIndex].answer) {
-        time -= 10
+        time -= 15
 
         // time = time - 10
         // to ensure that time never goes below 0 if the user answers the questions incorrectly. This condition keeps it at 0
@@ -102,15 +100,13 @@ function click() {
     questionIndex++
     // console.log(questionIndex)
 
-    // if there are more questions need to ask the display question function again. else the game is over. if the time has ran out the game is also over. 
-    if (time === 0 || questionIndex === 4) {
+    // if there are more questions needed to ask the display question function again. else the game is over. if the time has ran out the game is also over. 
+    if (time <= 0 || questionIndex === questions.length) {
         gameOver()
     } else {
         displayQuestion()
     }
-
 }
-
 function gameOver() {
     // stop timer
     clearInterval(timerStart)
@@ -120,12 +116,24 @@ function gameOver() {
     // need to show the question container
     resultsEl.classList.remove('hidden')
 }
-
-
 // user clicks start button
 btnStart.addEventListener('click', start)
 
+var submitButtonEl = document.getElementById("submit");
+var submitNameEl = document.getElementById("enter-name");
+var answersEl = document.getElementById("answers");
 
+submitButtonEl.addEventListener('click', function onClick() {
+    var name = submitNameEl.value;
+    localStorage.setItem("answers", [{name, time}]);
+    var arrAnswers = localStorage.getItem("answers");
+    for (var i = 0; i < arrAnswers.length; i++) {
+        answersEl.textContent = arrAnswers[i].['name'
+    }
+})
+console.log(myObj['first-name'])
+// Output:
+// 'Bruce'
 //Create Options --> are these appended to the results portion or is this just meant for the initials? Are the options in a giant object with the questions? 
 
 
