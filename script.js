@@ -124,14 +124,31 @@ var submitNameEl = document.getElementById("enter-name");
 var answersEl = document.getElementById("answers");
 
 submitButtonEl.addEventListener('click', function onClick() {
+    console.log("test")
     var name = submitNameEl.value;
-    localStorage.setItem("answers", [{name, time}]);
-    var arrAnswers = localStorage.getItem("answers");
-    for (var i = 0; i < arrAnswers.length; i++) {
-        answersEl.textContent = arrAnswers[i].['name'
+    var answers = localStorage.getItem("answers");
+    if (answers) {
+        // parse the answers so now that it is an array
+        var parseAnswers = JSON.parse(answers)
+        // pushing new answers into the parseAnswers array 
+        parseAnswers.push({name, time})
+        // need to stringify parsed answers
+        var stringifiedparseAnswers = JSON.stringify(parseAnswers)
+        // set the stringified answers to local storage 
+        localStorage.setItem("answers", stringifiedparseAnswers)
+        var joinedAnswers = ""
+        for (var i = 0; i < parseAnswers.length; i++) {
+            joinedAnswers += parseAnswers[i].name + parseAnswers[i].time + "\n"
+        }
+        document.getElementById("answers").textContent = joinedAnswers
+    } else {
+        var initialArr = [];
+        initialArr.push({name,time})
+        var stringifyinitialArr = JSON.stringify(initialArr)
+        localStorage.setItem("answers", stringifyinitialArr)
     }
 })
-console.log(myObj['first-name'])
+
 // Output:
 // 'Bruce'
 //Create Options --> are these appended to the results portion or is this just meant for the initials? Are the options in a giant object with the questions? 
