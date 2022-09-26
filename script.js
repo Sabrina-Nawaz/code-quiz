@@ -6,6 +6,7 @@ var resultsEl = document.getElementById("results");
 var timerStart;
 var time = 95
 var questionIndex = 0;
+var score = 0;
 
 // Create Questions 
 var questions = [
@@ -62,9 +63,12 @@ function displayQuestion() {
     // created our h2 and div elements
     var h2El = document.createElement('h2');
     var divEl = document.createElement('div');
+    var incorrectEl = document.createElement('p');
 
     // targeted the question property from the current question object and added it to the h2El as its text content
     h2El.textContent = currentQuestionObject.question;
+    // targeted the incorrect 
+    incorrectEl.textContent = "Previous question is incorrect!"
 
     // iterates through the choices in the current question object
     for (var i = 0; i < currentQuestionObject.choices.length; i++) {
@@ -76,10 +80,9 @@ function displayQuestion() {
         btnEl.addEventListener('click', click)
         // append newly created buttons the div element
         divEl.append(btnEl)
-
     }
-    // appends the question and the choices to the quizEl
-    quizEl.append(h2El, divEl)
+    // appends the question, the choices and incorrect element to the quizEl
+    quizEl.append(h2El, divEl, incorrectEl)
 }
 
 function click() {
@@ -95,6 +98,8 @@ function click() {
         }
         // this displays time on the page
         timerEl.textContent = time
+    } else {
+        score++
     }
     // when a button is clicked the question index is increased by one
     questionIndex++
@@ -112,9 +117,14 @@ function gameOver() {
     clearInterval(timerStart)
 
     // hide an element
-    quizEl.classList.add('hidden')
+    document.getElementById("quiz").classList.add('hidden')
     // need to show the question container
     resultsEl.classList.remove('hidden')
+    // need to hide the timer once the game is over
+    document.getElementById("header").classList.add('hidden')
+    // need to hide the question once the game is over
+    
+
 }
 // user clicks start button
 btnStart.addEventListener('click', start)
@@ -130,20 +140,22 @@ submitButtonEl.addEventListener('click', function onClick() {
     if (answers) {
         // parse the answers so now that it is an array
         var parseAnswers = JSON.parse(answers)
+       
         // pushing new answers into the parseAnswers array 
-        parseAnswers.push({name, time})
+        parseAnswers.push({name, score})
         // need to stringify parsed answers
         var stringifiedparseAnswers = JSON.stringify(parseAnswers)
         // set the stringified answers to local storage 
         localStorage.setItem("answers", stringifiedparseAnswers)
         var joinedAnswers = ""
         for (var i = 0; i < parseAnswers.length; i++) {
-            joinedAnswers += parseAnswers[i].name + parseAnswers[i].time + "\n"
+            joinedAnswers += parseAnswers[i].name + parseAnswers[i].score + "\n"
         }
         document.getElementById("answers").textContent = joinedAnswers
+    // Push the name and score into the initial Array
     } else {
         var initialArr = [];
-        initialArr.push({name,time})
+        initialArr.push({name,score})
         var stringifyinitialArr = JSON.stringify(initialArr)
         localStorage.setItem("answers", stringifyinitialArr)
     }
