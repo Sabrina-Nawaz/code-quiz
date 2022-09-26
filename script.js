@@ -71,7 +71,7 @@ function displayQuestion() {
 
     // targeted the question property from the current question object and added it to the h2El as its text content
     h2El.textContent = currentQuestionObject.question;
-    // targeted the incorrect 
+    // targeted the incorrect answers and added the string below as its text content. 
     incorrectEl.textContent = "Previous question is incorrect!"
 
     // iterates through the choices in the current question object
