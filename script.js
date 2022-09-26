@@ -8,27 +8,31 @@ var time = 95
 var questionIndex = 0;
 var score = 0;
 
-// Create Questions 
+// Creates Questions 
 var questions = [
     {
         question: "Commonly used data types do NOT include:",
         choices: ['strings', 'alerts', 'booleans', 'numbers'],
-        answer: 'alerts'
+        answer: 'alerts',
+        result: false
     },
     {
         question: "The condition in an if/else statement is enclosed with:",
         choices: ['quotes', 'parentheses', 'square brackets', 'curly brackets'],
-        answer: 'curly brackets'
+        answer: 'curly brackets',
+        result: false
     },
     {
         question: "Arrays in JavaScript can be used to store:",
         choices: ['numbers', 'strings', 'objects', 'all of the above'],
-        answer: 'all of the above'
+        answer: 'all of the above',
+        result: false
     },
     {
         question: "String values must be enclosed in what when being assigned to variables:",
         choices: ['quotes', 'commas', 'arrays', 'all of the above'],
-        answer: 'quotes'
+        answer: 'quotes',
+        result: false
     },
 ]
 //console.log(questions[1].question)
@@ -81,8 +85,13 @@ function displayQuestion() {
         // append newly created buttons the div element
         divEl.append(btnEl)
     }
-    // appends the question, the choices and incorrect element to the quizEl
-    quizEl.append(h2El, divEl, incorrectEl)
+    // appends the question, the choices and incorrect element to the quizEl and checks whether the previous question was answered correctly 
+    var previousQuestion = questions[questionIndex - 1]
+    if (!previousQuestion || previousQuestion.result === true) {
+        quizEl.append(h2El, divEl)
+    } else {
+        quizEl.append(h2El, divEl, incorrectEl)
+    }
 }
 
 function click() {
@@ -100,10 +109,10 @@ function click() {
         timerEl.textContent = time
     } else {
         score++
+        questions[questionIndex].result = true
     }
     // when a button is clicked the question index is increased by one
     questionIndex++
-    // console.log(questionIndex)
 
     // if there are more questions needed to ask the display question function again. else the game is over. if the time has ran out the game is also over. 
     if (time <= 0 || questionIndex === questions.length) {
@@ -123,8 +132,6 @@ function gameOver() {
     // need to hide the timer once the game is over
     document.getElementById("header").classList.add('hidden')
     // need to hide the question once the game is over
-    
-
 }
 // user clicks start button
 btnStart.addEventListener('click', start)
@@ -134,15 +141,14 @@ var submitNameEl = document.getElementById("enter-name");
 var answersEl = document.getElementById("answers");
 
 submitButtonEl.addEventListener('click', function onClick() {
-    console.log("test")
     var name = submitNameEl.value;
     var answers = localStorage.getItem("answers");
     if (answers) {
         // parse the answers so now that it is an array
         var parseAnswers = JSON.parse(answers)
-       
+
         // pushing new answers into the parseAnswers array 
-        parseAnswers.push({name, score})
+        parseAnswers.push({ name, score })
         // need to stringify parsed answers
         var stringifiedparseAnswers = JSON.stringify(parseAnswers)
         // set the stringified answers to local storage 
@@ -152,17 +158,14 @@ submitButtonEl.addEventListener('click', function onClick() {
             joinedAnswers += parseAnswers[i].name + parseAnswers[i].score + "\n"
         }
         document.getElementById("answers").textContent = joinedAnswers
-    // Push the name and score into the initial Array
+        // Push the name and score into the initial Array
     } else {
         var initialArr = [];
-        initialArr.push({name,score})
+        initialArr.push({ name, score })
         var stringifyinitialArr = JSON.stringify(initialArr)
         localStorage.setItem("answers", stringifyinitialArr)
     }
 })
 
-// Output:
-// 'Bruce'
-//Create Options --> are these appended to the results portion or is this just meant for the initials? Are the options in a giant object with the questions? 
 
 
