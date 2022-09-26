@@ -1,5 +1,5 @@
 # JavaScript Coding Quiz 
-Link to deployed page:
+Link to deployed page: https://sabrina-nawaz.github.io/code-quiz/
 ![Screen Shot 2022-09-26 at 3 06 27 PM](https://user-images.githubusercontent.com/61954667/192360227-5c7e2bde-a656-440e-950d-a34798902299.png)
 
 ## Description
